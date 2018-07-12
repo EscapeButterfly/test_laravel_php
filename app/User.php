@@ -15,7 +15,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'second_name',
+        'nickname',
+        'phone_number',
+        'gender',
+        'email_subscriber',
+        'email',
+        'password',
     ];
 
     /**
@@ -24,6 +31,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
+    
+    /**
+     * The articles that belong to user.
+     */
+    public function articles()
+    {
+        return $this->belongsToMany('App\Article');
+    }
 }
