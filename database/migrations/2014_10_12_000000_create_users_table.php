@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('second_name');
             $table->string('nickname');
             $table->string('phone_number');
+            $table->string('avatar')->default('def_user_av.jpg');
             $table->enum('gender', ['male', 'female']);
             $table->boolean('email_subscriber');
             $table->string('email')->unique();

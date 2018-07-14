@@ -19,6 +19,7 @@ class User extends Authenticatable
         'second_name',
         'nickname',
         'phone_number',
+        'avatar',
         'gender',
         'email_subscriber',
         'email',
@@ -38,8 +39,7 @@ class User extends Authenticatable
     /**
      * The articles that belong to user.
      */
-    public function articles()
-    {
+    public function articles(){
         return $this->belongsToMany('App\Article');
     }
 }
