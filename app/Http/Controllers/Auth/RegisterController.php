@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/profile';
 
     /**
      * Create a new controller instance.
@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 
@@ -70,10 +70,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'second_name' => $data['surname'],
             'phone_number' => $data['phone'],
-            'avatar' => 'default.jpg',
             'gender' => $data['sex'],
             'email' => $data['email'],
-            'email_subscriber' => $data['showPhone'],
             'password' => bcrypt($data['password']),
         ]);
     }
@@ -81,15 +79,21 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-
         event(new Registered($user = $this->create($request->all())));
 
-        $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+        if($request->hasFile('avatar')){
+            $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
 
-        $request->avatar->storeAs('public/avatars', $avatarName);
+            $request->avatar->storeAs('public/avatars', $avatarName);
 
-        $user->avatar = $avatarName;
-        $user->save();
+            $user->avatar = $avatarName;
+            $user->save();
+        }
+
+        if($request->has('subscribe')){
+            $user->email_subscriber = 1;
+            $user->save();
+        }
 
         $this->guard()->login($user);
 

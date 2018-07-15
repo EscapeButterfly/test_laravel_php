@@ -52,15 +52,20 @@
                             <!-- sex field -->
                             <div class="form-group">
                                 <label for="sex" class="col-md-4 control-label">Sex</label>
-                                <label class='form__inline-label' for="male">Male</label>
-                                <input class='form__inline-input' name='sex' id='male' value="male" type="radio">
-                                <label class='form__inline-label' for="female">Female</label>
-                                <input class='form__inline-input' name='sex' id='female' value="female" type="radio">
+                                <div class="col-md-6">
+                                    <label class='form__inline-label' for="male">Male</label>
+                                    <input class='form__inline-input' name='sex' id='male' value="male" type="radio">
+                                    <label class='form__inline-label' for="female">Female</label>
+                                    <input class='form__inline-input' name='sex' id='female' value="female" type="radio">
+                                </div>
                             </div>
                             <!-- avatar field -->
                             <div class="form-group">
-                                <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
-                                <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+                                <label for="avatar" class="col-md-4 control-label">Profile picture</label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+                                    <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+                                </div>
                             </div>
 
                             <!-- email field -->
@@ -102,12 +107,11 @@
                             </div>
                             <!-- email_subscribe field -->
                             <div class="form-group">
+                                <label class='col-md-4 control-label' for="subscribe">I agree to receive emails</label>
                                 <div class="col-md-6">
-                                    <label class='form__inline-label' for="showPhone">I agree to receive emails</label>
-                                    <input class='form__inline-input' id='showPhone' name='showPhone' type="checkbox">
+                                    <input class='form__inline-input' id='subscribe' name='subscribe' type="checkbox">
                                 </div>
                             </div>
-
                             <!-- Submit -->
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
