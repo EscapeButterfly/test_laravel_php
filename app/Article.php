@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     //Table name
-    protected $table = 'article';
+    protected $table = 'articles';
 
     /**
      * The attributes that are mass assignable.
@@ -16,6 +16,7 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
+        'title',
         'text',
     ];
 
@@ -24,6 +25,6 @@ class Article extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'user_article');
     }
 }

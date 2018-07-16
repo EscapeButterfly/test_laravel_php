@@ -40,6 +40,6 @@ class User extends Authenticatable
      * The articles that belong to user.
      */
     public function articles(){
-        return $this->belongsToMany('App\Article');
+        return $this->belongsToMany('App\Article', 'user_article');
     }
 }
