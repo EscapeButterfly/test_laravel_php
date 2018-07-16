@@ -84,7 +84,7 @@ class RegisterController extends Controller
         if($request->hasFile('avatar')){
             $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
 
-            $request->avatar->storeAs('public/avatars', $avatarName);
+            $request->avatar->storeAs('avatars/', $avatarName);
 
             $user->avatar = $avatarName;
             $user->save();

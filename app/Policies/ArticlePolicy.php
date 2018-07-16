@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\User;
 use App\Article;
-use App\UserArticle;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,21 +46,10 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article)
     {
-        //All articles id where user is author.
-        $userArticles = UserArticle::where('user_id', $user->id)->get();
-
-        $confirmFlag = false; //check flag.
-        //We compare article ids that belong to user with article id that we want to edit.
-        foreach ($userArticles as $userArticle) {
-            if ($userArticle->article_id != $article->id) {
-                $confirmFlag = false;
-            } else {
-                $confirmFlag = true;
-                break; // if we found that article that we want to edit
-                // is belong to user then we break our foreach with $confirmFlag=true.
-            }
+        if($article->users()->where('id', Auth::user()->id)->get()->count()){
+            return true;
         }
-        return $confirmFlag == true ? true : false;
+        return false;
     }
 
     /**
@@ -73,20 +61,9 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article)
     {
-        //All articles id where user is author.
-        $userArticles = UserArticle::where('user_id', $user->id)->get();
-
-        $confirmFlag = false; //check flag.
-        //We compare article ids that belong to user with article id that we want to edit.
-        foreach ($userArticles as $userArticle) {
-            if ($userArticle->article_id != $article->id) {
-                $confirmFlag = false;
-            } else {
-                $confirmFlag = true;
-                break; // if we found that article that we want to edit
-                // is belong to user then we break our foreach with $confirmFlag=true.
-            }
+        if($article->users()->where('id', Auth::user()->id)->get()->count()){
+            return true;
         }
-        return $confirmFlag == true ? true : false;
+        return false;
     }
 }
