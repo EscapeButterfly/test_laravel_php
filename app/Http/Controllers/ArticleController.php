@@ -96,9 +96,14 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $user = Auth::user();
 
-        if ($user->can('update', $article)) {
+        //Task 4 test
+        if($article->checkUser($user)){
             return view('articles.edit')->with('article', $article);
         }
+
+        /*if ($user->can('update', $article)) {
+            return view('articles.edit')->with('article', $article);
+        }*/
         return redirect('/articles')->with('error', 'Unauthorized Page');
     }
 

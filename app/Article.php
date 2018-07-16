@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Article extends Model
 {
+    use SoftDeletes;
+
     //Table name
     protected $table = 'articles';
 
@@ -26,5 +29,21 @@ class Article extends Model
     public function users()
     {
         return $this->belongsToMany('App\User', 'user_article');
+    }
+
+    /**
+     * Check is user the author of article.
+     *
+     * @param \App\User $user
+     * @return bool|null
+     */
+    public function checkUser(User $user)
+    {
+        if($this->trashed()){
+            return null;
+        }else if($this->users()->where('id', $user->id)->get()->count()){
+            return true;
+        }
+        return false;
     }
 }

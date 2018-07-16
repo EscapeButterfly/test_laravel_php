@@ -46,7 +46,7 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article)
     {
-        if($article->users()->where('id', Auth::user()->id)->get()->count()){
+        if($article->users()->where('id', $user->id)->get()->count()){
             return true;
         }
         return false;
@@ -61,7 +61,7 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article)
     {
-        if($article->users()->where('id', Auth::user()->id)->get()->count()){
+        if($article->users()->where('id', $user->id)->get()->count()){
             return true;
         }
         return false;

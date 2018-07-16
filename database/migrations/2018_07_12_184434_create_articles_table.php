@@ -7,7 +7,6 @@ use \Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreateArticlesTable extends Migration
 {
-    use SoftDeletes;
 
     /**
      * Run the migrations.
