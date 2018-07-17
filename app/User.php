@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email_subscriber',
         'email',
         'password',
+        'experience'
     ];
 
     /**

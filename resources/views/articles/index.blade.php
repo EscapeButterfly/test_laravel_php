@@ -6,7 +6,11 @@
         @foreach($articles as $article)
             <div class="well">
                 <h3><a href="/articles/{{$article->id}}">{{$article->title}}</a></h3>
-                <small>Written on {{$article->created_at}}</small>
+                <small>Written on {{$article->created_at}} by
+                    @foreach($article->users()->get() as $user)
+                        {{ $user->nickname }}
+                    @endforeach
+                </small>
             </div>
         @endforeach
         {{$articles->links()}}
