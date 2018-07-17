@@ -7,7 +7,11 @@
         {!!$article->text!!}
     </div>
     <hr>
-    <small>Written on {{$article->created_at}} by somebody</small>
+    <small>Written on {{$article->created_at}} by
+        @foreach($article->users()->get() as $user)
+            {{ $user->nickname }}
+        @endforeach
+    </small>
     <hr>
     @if(!Auth::guest())
         @if(Auth::user()->can('update', $article))
