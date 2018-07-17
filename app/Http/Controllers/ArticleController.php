@@ -93,7 +93,7 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $article = Article::find($id);
+        $article = Article::withTrashed()->where('id', $id)->first();
         $user = Auth::user();
 
         //Task 4 test
@@ -124,12 +124,21 @@ class ArticleController extends Controller
         $user = Auth::user();
         $article = Article::find($id);
 
-        if ($user->can('update', $article)) {
+        //Task 4 test
+        if($article->checkUser($user)){
             $article->title = $request->input('title');
             $article->text = $request->input('text');
             $article->save();
             return redirect('/articles')->with('success', 'Article Updated');
         }
+
+
+        /*if ($user->can('update', $article)) {
+            $article->title = $request->input('title');
+            $article->text = $request->input('text');
+            $article->save();
+            return redirect('/articles')->with('success', 'Article Updated');
+        }*/
         return redirect('/articles')->with('error', 'Unauthorized Page');
     }
 

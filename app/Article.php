@@ -37,7 +37,7 @@ class Article extends Model
      * @param \App\User $user
      * @return bool|null
      */
-    public function checkUser(User $user)
+    public function checkUser(User $user) : ?bool
     {
         if($this->trashed()){
             return null;
