@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Posts</h1>
+    <h1>Articles</h1>
+    <a href="/articles/create" class="btn btn-default">Create new</a>
     @if(count($articles) > 0)
         @foreach($articles as $article)
             <div class="well">
@@ -15,6 +16,6 @@
         @endforeach
         {{$articles->links()}}
     @else
-        <p>No posts found</p>
+        <p>No articles found</p>
     @endif
 @endsection

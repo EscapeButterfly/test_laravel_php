@@ -10,6 +10,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('profile', compact('user', $user));
+        $articles = $user->articles()->orderBy('created_at', 'desc')->paginate(3);
+        return view('profile', compact('user', $user))->with('articles', $articles);
     }
 }

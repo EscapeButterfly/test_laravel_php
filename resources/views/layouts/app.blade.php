@@ -43,9 +43,11 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @guest
+                        <li><a href="{{ route('articles.index') }}">Articles</a></li>
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
+                        <li><a href="{{ route('articles.index') }}">Articles</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position:relative; padding-left:50px;">
                                 <img src="/storage/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%">
@@ -71,12 +73,12 @@
                         </li>
                     @endguest
                 </ul>
-                @include('inc.messages')
             </div>
+            @include('inc.messages')
+            @yield('content')
         </div>
     </nav>
 
-    @yield('content')
 </div>
 
 <!-- Scripts -->
